@@ -11,6 +11,7 @@
 2. JS bridge supported.
 3. Indicating of loading progress.
 4. Indicating of web page title.
+5. Auto set close bar button item.
 
 ## Example
 

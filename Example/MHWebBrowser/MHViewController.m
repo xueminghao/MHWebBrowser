@@ -16,7 +16,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadURLString:@"https://www.baidu.com"];
 }
 
 @end

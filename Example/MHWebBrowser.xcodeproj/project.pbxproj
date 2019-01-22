@@ -24,6 +24,7 @@
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		A6A68025984BC7530F5320FF /* Pods_MHWebBrowser_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271E3CD24D3C2C295ECF6260 /* Pods_MHWebBrowser_Tests.framework */; };
 		B202A9BCC6629EC26FE696B9 /* Pods_MHWebBrowser_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3712C9A38A0441111BDC1F0F /* Pods_MHWebBrowser_Example.framework */; };
+		E527E61621F739E6005F4DCE /* MHTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E527E61521F739E5005F4DCE /* MHTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,8 @@
 		8D6EFAF3AD6E840AFE596530 /* MHWebBrowser.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MHWebBrowser.podspec; path = ../MHWebBrowser.podspec; sourceTree = "<group>"; };
 		8DC850BB12FB534D299DDB47 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		D9D6F70D32BF9219D468C3AE /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		E527E61421F739E5005F4DCE /* MHTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MHTableViewController.h; sourceTree = "<group>"; };
+		E527E61521F739E5005F4DCE /* MHTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MHTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +138,8 @@
 				6003F59C195388D20070C39A /* MHAppDelegate.h */,
 				6003F59D195388D20070C39A /* MHAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
+				E527E61421F739E5005F4DCE /* MHTableViewController.h */,
+				E527E61521F739E5005F4DCE /* MHTableViewController.m */,
 				6003F5A5195388D20070C39A /* MHViewController.h */,
 				6003F5A6195388D20070C39A /* MHViewController.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
@@ -398,6 +403,7 @@
 			files = (
 				6003F59E195388D20070C39A /* MHAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* MHViewController.m in Sources */,
+				E527E61621F739E6005F4DCE /* MHTableViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
