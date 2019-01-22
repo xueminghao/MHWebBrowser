@@ -9,6 +9,8 @@
 
 1. Webkit drived.
 2. JS bridge supported.
+3. Indicating of loading progress.
+4. Indicating of web page title.
 
 ## Example
 
