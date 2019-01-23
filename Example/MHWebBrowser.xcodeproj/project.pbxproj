@@ -25,6 +25,7 @@
 		A6A68025984BC7530F5320FF /* Pods_MHWebBrowser_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271E3CD24D3C2C295ECF6260 /* Pods_MHWebBrowser_Tests.framework */; };
 		B202A9BCC6629EC26FE696B9 /* Pods_MHWebBrowser_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3712C9A38A0441111BDC1F0F /* Pods_MHWebBrowser_Example.framework */; };
 		E527E61621F739E6005F4DCE /* MHTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E527E61521F739E5005F4DCE /* MHTableViewController.m */; };
+		E536165B21F8067C00EE31FF /* local.html in Resources */ = {isa = PBXBuildFile; fileRef = E536165A21F8067C00EE31FF /* local.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,11 +66,12 @@
 		67A8280F1D262BE69D5B00E4 /* Pods-MHWebBrowser_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MHWebBrowser_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MHWebBrowser_Tests/Pods-MHWebBrowser_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8D6EFAF3AD6E840AFE596530 /* MHWebBrowser.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MHWebBrowser.podspec; path = ../MHWebBrowser.podspec; sourceTree = "<group>"; };
+		8D6EFAF3AD6E840AFE596530 /* MHWebBrowser.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MHWebBrowser.podspec; path = ../MHWebBrowser.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		8DC850BB12FB534D299DDB47 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		D9D6F70D32BF9219D468C3AE /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		E527E61421F739E5005F4DCE /* MHTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MHTableViewController.h; sourceTree = "<group>"; };
 		E527E61521F739E5005F4DCE /* MHTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MHTableViewController.m; sourceTree = "<group>"; };
+		E536165A21F8067C00EE31FF /* local.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = local.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 				E527E61521F739E5005F4DCE /* MHTableViewController.m */,
 				6003F5A5195388D20070C39A /* MHViewController.h */,
 				6003F5A6195388D20070C39A /* MHViewController.m */,
+				E536165A21F8067C00EE31FF /* local.html */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -285,6 +288,7 @@
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				E536165B21F8067C00EE31FF /* local.html in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

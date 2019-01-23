@@ -21,11 +21,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Initializers
 
-- (instancetype)initWithURLString:(nullable NSString *)URLString NS_DESIGNATED_INITIALIZER;
+/**
+ Designated initializer.
+ */
+- (instancetype)initWithURL:(nullable NSURL *)url NS_DESIGNATED_INITIALIZER;
 
 #pragma mark - Load
 
-- (void)loadURLString:(NSString *)URLString;
+- (void)loadURL:(NSURL *)url;
 
 @end
 

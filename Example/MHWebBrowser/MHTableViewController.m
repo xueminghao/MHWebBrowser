@@ -9,7 +9,20 @@
 #import "MHTableViewController.h"
 #import "MHViewController.h"
 
+@interface MHTestModel : NSObject
+
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSURL *url;
+
+@end
+
+@implementation MHTestModel
+
+@end
+
 @interface MHTableViewController ()
+
+@property (nonatomic, strong) NSArray<MHTestModel *> *dataSource;
 
 @end
 
@@ -18,24 +31,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setupDataSource];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+}
+
+- (void)setupDataSource {
+    NSMutableArray *temp = [NSMutableArray new];
+    {
+        MHTestModel *model = [MHTestModel new];
+        model.title = @"Baidu";
+        model.url = [NSURL URLWithString:@"https://www.baidu.com"];
+        [temp addObject:model];
+    }
+    {
+        MHTestModel *model = [MHTestModel new];
+        model.title = @"Local";
+        model.url = [[NSBundle mainBundle] URLForResource:@"local" withExtension:@"html"];
+        [temp addObject:model];
+    }
+    self.dataSource = [temp copy];
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return self.dataSource.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.text = @"Baidu";
+    cell.textLabel.text = self.dataSource[indexPath.row].title;
     return cell;
 }
 
@@ -44,7 +71,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    MHViewController *vc = [[MHViewController alloc] initWithURLString:@"https://www.baidu.com"];
+    MHViewController *vc = [[MHViewController alloc] initWithURL:self.dataSource[indexPath.row].url];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

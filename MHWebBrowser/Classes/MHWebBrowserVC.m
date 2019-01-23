@@ -21,8 +21,8 @@ static NSArray *kvoProperties;
 @property (nonatomic, strong) UIBarButtonItem *backItem;
 @property (nonatomic, strong) UIBarButtonItem *closeItem;
 
-@property (nonatomic, copy) NSString *initialURLString;
-@property (nonatomic, copy) NSString *URLString;
+@property (nonatomic, copy) NSURL *initialURL;
+@property (nonatomic, strong) NSURL *url;
 
 @end
 
@@ -30,9 +30,9 @@ static NSArray *kvoProperties;
 
 #pragma mark - Life cycles
 
-- (instancetype)initWithURLString:(NSString *)URLString {
+- (instancetype)initWithURL:(NSURL *)url {
     if (self = [super initWithNibName:nil bundle:nil]) {
-        self.initialURLString = URLString;
+        self.initialURL = url;
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             kvoProperties = @[
@@ -47,11 +47,11 @@ static NSArray *kvoProperties;
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    return [self initWithURLString:nil];
+    return [self initWithURL:nil];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    return [self initWithURLString:nil];
+    return [self initWithURL:nil];
 }
 
 - (void)viewDidLoad {
@@ -100,10 +100,11 @@ static NSArray *kvoProperties;
 
 #pragma mark - Public methods
 
-- (void)loadURLString:(NSString *)URLString {
-    if (URLString.length > 0) {
-        self.URLString = URLString;
+- (void)loadURL:(NSURL *)URL {
+    if (!URL) {
+        return;
     }
+    self.url = URL;
     [self load];
 }
 
@@ -241,17 +242,17 @@ static NSArray *kvoProperties;
 }
 
 - (void)loadInitalRequest {
-    if (self.initialURLString.length == 0) {
-        return;
-    }
-    self.URLString = self.initialURLString;
-    [self load];
+    [self loadURL:self.initialURL];
 }
 
 - (void)load {
-    NSURL *url = [NSURL URLWithString:self.URLString];
-    NSURLRequest *reqeust = [NSURLRequest requestWithURL:url];
-    [self.webView loadRequest:reqeust];
+    if ([self.url isFileURL]) {
+        NSString *HTMLString = [NSString stringWithContentsOfURL:self.url encoding:NSUTF8StringEncoding error:nil];
+        [self.webView loadHTMLString:HTMLString baseURL:nil];
+    } else {
+        NSURLRequest *reqeust = [NSURLRequest requestWithURL:self.url];
+        [self.webView loadRequest:reqeust];
+    }
 }
 
 - (UIBarButtonItem *)getBackItemIfAvaliable {
