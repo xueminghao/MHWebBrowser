@@ -11,9 +11,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class MHWebBrowserVC;
 
+typedef void(^MHWebViewResolveHandler)(id);
+typedef void(^MHWebViewRejectHandler)(NSString*);
+
 @protocol MHWebBrowserVCDelegate <NSObject>
 
-
+- (void)webBrowser:(MHWebBrowserVC *)vc didReceiveScriptMessage:(NSDictionary *)message withResolveHandler:(MHWebViewResolveHandler)resolveHandler rejectHandler:(MHWebViewRejectHandler)rejectHandler;
 
 @end
 
@@ -25,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
  Designated initializer.
  */
 - (instancetype)initWithURL:(nullable NSURL *)url NS_DESIGNATED_INITIALIZER;
+
+@property (nonatomic, weak) id<MHWebBrowserVCDelegate> delegate;
 
 #pragma mark - Load
 

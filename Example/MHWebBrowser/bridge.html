@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <title>Test</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script>
+            
+            function getNativeVersion() {
+                postBridgeMessage("getBundleVersion", undefined, function (version) {
+                                    document.getElementById("version_label").innerHTML=version;
+                                    });
+            }
+        
+        function sendApiRequest() {
+            var p = document.getElementById("api_result");
+            p.innerHTML="Loading...";
+            postBridgeMessage("sendApiRequest", undefined, function (data) {
+                                p.innerHTML=data;
+                                });
+        }
+        </script>
+        <title>
+            JSBridge
+        </title>
+    </head>
+    <body>
+        <div>
+            <button  type="button" onclick="getNativeVersion()">Get Native version</button>
+            <p id="version_label"></p>
+        </div>
+        <div>
+            <button onclick="sendApiRequest()">Send api request</button>
+            <p id="api_result"></p>
+        </div>
+    </body>
+</html>

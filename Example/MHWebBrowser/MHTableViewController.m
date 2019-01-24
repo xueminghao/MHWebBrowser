@@ -39,14 +39,8 @@
     NSMutableArray *temp = [NSMutableArray new];
     {
         MHTestModel *model = [MHTestModel new];
-        model.title = @"Baidu";
-        model.url = [NSURL URLWithString:@"https://www.baidu.com"];
-        [temp addObject:model];
-    }
-    {
-        MHTestModel *model = [MHTestModel new];
-        model.title = @"Local";
-        model.url = [[NSBundle mainBundle] URLForResource:@"local" withExtension:@"html"];
+        model.title = @"JSBridge";
+        model.url = [[NSBundle mainBundle] URLForResource:@"bridge" withExtension:@"html"];
         [temp addObject:model];
     }
     self.dataSource = [temp copy];

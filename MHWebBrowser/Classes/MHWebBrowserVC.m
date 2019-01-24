@@ -8,11 +8,14 @@
 #import "MHWebBrowserVC.h"
 #import "MHBundleHelper.h"
 
+#define BridgeTunnel @"bridgeTunnel"
+#define BridgeTunnelMessagePromiseIdendifier @"BridgeTunnelMessagePromiseIdendifier"
+
 @import WebKit;
 
 static NSArray *kvoProperties;
 
-@interface MHWebBrowserVC ()<WKNavigationDelegate>
+@interface MHWebBrowserVC ()<WKNavigationDelegate, WKScriptMessageHandler>
 
 @property (nonatomic, strong) WKWebViewConfiguration *webViewConfiguration;
 @property (nonatomic, strong) WKWebView *webView;
@@ -61,6 +64,8 @@ static NSArray *kvoProperties;
     [self mh_setupSubViews];
     [self mh_addKVObservers];
     [self loadInitalRequest];
+    UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(load)];
+    self.navigationItem.rightBarButtonItem = refreshItem;
     self.navigationItem.leftBarButtonItem = [self getBackItemIfAvaliable];
 }
 
@@ -154,6 +159,73 @@ static NSArray *kvoProperties;
     NSLog(@"%@",NSStringFromSelector(_cmd));
 }
 
+#pragma mark - WKScriptMessageHandler
+
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
+    if ([message.name isEqualToString:BridgeTunnel]) {
+        if (![message.body isKindOfClass:[NSDictionary class]]) {
+            return;
+        }
+        NSDictionary *messageBody = message.body;
+        NSString *promiseIdentifier = messageBody[BridgeTunnelMessagePromiseIdendifier];
+        if (promiseIdentifier.length == 0) {
+            return;
+        }
+        NSMutableDictionary *dict = [NSMutableDictionary new];
+        for (NSString *key in messageBody.keyEnumerator) {
+            if ([key isEqualToString:BridgeTunnelMessagePromiseIdendifier]) {
+                continue;
+            }
+            [dict setObject:messageBody[key] forKey:key];
+        }
+        if ([self.delegate respondsToSelector:@selector(webBrowser:didReceiveScriptMessage:withResolveHandler:rejectHandler:)]) {
+            [self.delegate webBrowser:self didReceiveScriptMessage:[dict copy] withResolveHandler:^(id _Nonnull data) {
+                [self resolvePromise:promiseIdentifier withData:data];
+            } rejectHandler:^(NSString * _Nonnull msg) {
+                [self rejectPromise:promiseIdentifier withErrorMessage:msg];
+            }];
+        }
+    }
+}
+
+#pragma mark - JSBridge
+
+- (void)resolvePromise:(NSString *)promiseIdentifier withData:(id)data {
+    if (promiseIdentifier.length == 0) {
+        return;
+    }
+    NSString *jsCode = nil;
+    id params = nil;
+    if (data) {
+        if ([data isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dict = data;
+            NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+            params = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        } else if ([data isKindOfClass:[NSArray class]]) {
+            NSArray *array = data;
+            NSData *data = [NSJSONSerialization dataWithJSONObject:array options:NSJSONWritingPrettyPrinted error:nil];
+            params = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        } else {
+            params = data;
+        }
+    }
+    if (params) {
+        jsCode = [NSString stringWithFormat:@"resolveBridgePromise(\"%@\",\"%@\")", promiseIdentifier, params];
+    } else {
+        jsCode = [NSString stringWithFormat:@"resolveBridgePromise(\"%@\")", promiseIdentifier];
+    }
+    [self.webView evaluateJavaScript:jsCode completionHandler:nil];
+}
+
+- (void)rejectPromise:(NSString *)promiseIdentifier withErrorMessage:(NSString *)errorMessage {
+    if (promiseIdentifier.length == 0) {
+        return;
+    }
+    NSString *msg = errorMessage.length == 0 ? @"Unknown error happened." : errorMessage;
+    NSString *jsCode = [NSString stringWithFormat:@"rejectBridgePromise(\"%@\",\"%@\")", promiseIdentifier, msg];
+    [self.webView evaluateJavaScript:jsCode completionHandler:nil];
+}
+
 #pragma mark - Lazy load properties
 
 - (UIBarButtonItem *)backItem {
@@ -188,6 +260,12 @@ static NSArray *kvoProperties;
 
 - (void)mh_setupSubViews {
     self.webViewConfiguration = [[WKWebViewConfiguration alloc] init];
+    WKUserContentController *contentController = self.webViewConfiguration.userContentController;
+    NSString *scriptPath = [[MHBundleHelper resourceBundle] pathForResource:@"inject" ofType:@"js"];
+    NSString *jsContent = [NSString stringWithContentsOfFile:scriptPath encoding:NSUTF8StringEncoding error:nil];
+    WKUserScript *bridgeScript = [[WKUserScript alloc] initWithSource:jsContent injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:YES];
+    [contentController addUserScript:bridgeScript];
+    [contentController addScriptMessageHandler:self name:BridgeTunnel];
     self.webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:self.webViewConfiguration];
     self.webView.navigationDelegate = self;
     if (@available(iOS 11.0, *)) {

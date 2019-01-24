@@ -25,7 +25,7 @@
 		A6A68025984BC7530F5320FF /* Pods_MHWebBrowser_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271E3CD24D3C2C295ECF6260 /* Pods_MHWebBrowser_Tests.framework */; };
 		B202A9BCC6629EC26FE696B9 /* Pods_MHWebBrowser_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3712C9A38A0441111BDC1F0F /* Pods_MHWebBrowser_Example.framework */; };
 		E527E61621F739E6005F4DCE /* MHTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E527E61521F739E5005F4DCE /* MHTableViewController.m */; };
-		E536165B21F8067C00EE31FF /* local.html in Resources */ = {isa = PBXBuildFile; fileRef = E536165A21F8067C00EE31FF /* local.html */; };
+		E536165D21F8078800EE31FF /* bridge.html in Resources */ = {isa = PBXBuildFile; fileRef = E536165C21F8078800EE31FF /* bridge.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,7 +71,7 @@
 		D9D6F70D32BF9219D468C3AE /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		E527E61421F739E5005F4DCE /* MHTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MHTableViewController.h; sourceTree = "<group>"; };
 		E527E61521F739E5005F4DCE /* MHTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MHTableViewController.m; sourceTree = "<group>"; };
-		E536165A21F8067C00EE31FF /* local.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = local.html; sourceTree = "<group>"; };
+		E536165C21F8078800EE31FF /* bridge.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = bridge.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +144,7 @@
 				E527E61521F739E5005F4DCE /* MHTableViewController.m */,
 				6003F5A5195388D20070C39A /* MHViewController.h */,
 				6003F5A6195388D20070C39A /* MHViewController.m */,
-				E536165A21F8067C00EE31FF /* local.html */,
+				E536165C21F8078800EE31FF /* bridge.html */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -288,8 +288,8 @@
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
-				E536165B21F8067C00EE31FF /* local.html in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
+				E536165D21F8078800EE31FF /* bridge.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
