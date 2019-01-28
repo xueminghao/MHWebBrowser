@@ -7,12 +7,10 @@
 
 ## Feature
 
-1. Webkit drived.
-2. JS bridge supported.
-3. Indicating of loading progress.
-4. Indicating of web page title.
-5. Auto set close bar button item.
-6. Load local html files.
+1. Webkit driven.
+2. Indicating of loading status,progress, page title etc.
+3. Javascript bridge supported.Javascript can call native sync or async methods in the same way.
+4. Friendly API. Both of above are provided by delegate pattern.
 
 ## Example
 

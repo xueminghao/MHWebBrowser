@@ -11,7 +11,7 @@
 #define BridgeMethodName @"BridgeMethodName"
 #define BridgeMethodParams @"BridgeMethodParams"
 
-@interface MHViewController ()<MHWebBrowserVCDelegate>
+@interface MHViewController ()
 
 @end
 
@@ -19,12 +19,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.delegate = self;
 }
 
-#pragma mark - MHWebBrowserVCDelegate
-
-- (void)webBrowser:(MHWebBrowserVC *)vc didReceiveScriptMessage:(NSDictionary *)message withResolveHandler:(MHWebViewResolveHandler)resolveHandler rejectHandler:(MHWebViewRejectHandler)rejectHandler {
+- (void)didReceiveScriptMessage:(NSDictionary *)message withResolveHandler:(MHWebViewResolveHandler)resolveHandler rejectHandler:(MHWebViewRejectHandler)rejectHandler {
     NSString *methodName = message[BridgeMethodName];
     if ([methodName isEqualToString:@"getBundleVersion"]) {
         resolveHandler([self getBundleVersion]);
@@ -44,4 +41,5 @@
         completion();
     });
 }
+
 @end
