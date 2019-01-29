@@ -61,6 +61,8 @@
     
 }
 
+#pragma mark - Target action methods
+
 - (void)load {
     [self.webView reload];
 }
